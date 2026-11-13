@@ -1,0 +1,93 @@
+/* Custom Styles & Floating Hearts */
+body {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.bg-glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.bg-glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(244, 63, 94, 0.15);
+}
+
+/* Floating Particle Animation */
+.heart-particle {
+    position: fixed;
+    color: #f43f5e;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatUp 8s linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.6);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.7;
+    }
+    80% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-10vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Capsule Glow Effects */
+.capsule-today {
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(244, 63, 94, 0.4), 0 0 20px rgba(244, 63, 94, 0.2);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(244, 63, 94, 0.8), 0 0 35px rgba(244, 63, 94, 0.5);
+        transform: scale(1.03);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #fff1f2;
+}
+::-webkit-scrollbar-thumb {
+    background: #fda4af;
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #f43f5e;
+}
+/* Playlist Scrollbar & Styling */
+#playlist-box::-webkit-scrollbar {
+    width: 5px;
+}
+#playlist-box::-webkit-scrollbar-thumb {
+    background: #fda4af;
+    border-radius: 4px;
+}
+.playlist-item {
+    transition: all 0.2s ease;
+}
+.playlist-item:hover {
+    background-color: #fff1f2;
+    color: #e11d48;
+}

@@ -1,0 +1,41 @@
+Halooo cayaang ini adalah susunan filenya untuk cara start sayang start di index.html aja muaachhh
+dan juga ada internet ya biar keload semua depensinya, eittt jangan buka kodenya ya terutama .json sama folder image dan audio humppphhhh nanti keliatan isi pesannya
+
+
+nb
+jika error engga ada suara atau gambar harus di go live, dan panduan untuk go live ada di extention ya
+
+
+susunan tataletak
+my-time-capsule/
+│
+├── index.html          --> Struktur HTML & Tampilan
+├── style.css           --> Style khusus & Animasi
+├── script.js           --> Logika JavaScript (Filter, Tanggal, Modal, Audio)
+├── messages.json       --> Data 80+ pesan (Format JSON)
+│
+├── images/             --> Simpan file foto di sini (misal: day1.jpg, day2.png)
+│   ├── day1.jpg
+│   └── day2.jpg
+│
+└── audio/              --> Simpan rekaman suara (VN) & BGM di sini
+    ├── vn_day1.mp3
+    ├── bgm_1.mp3
+    └── ...
+
+Fix bug
+song
+
+
+deppensi teks
+˚˖𓍢ִ໋❀ 𝙺𝚑𝚒𝚢𝚊 ໒꒰ྀིっ˕ -｡꒱ྀི১
+
+₍^. .^₎⟆
+𐙚
+⊹ ࣪ ˖
+❣
+●
+❆
+☘︎
+ʚɞ
+✎

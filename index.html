@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Messages ⊹ ࣪ ˖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rose-pink': '#ffe4e6',
+                        'love-red': '#e11d48',
+                        'deep-rose': '#881337',
+                        'soft-pink': '#fff1f2',
+                        'accent-pink': '#f43f5e'
+                    },
+                    fontFamily: {
+                        'cursive': ['"Dancing Script"', 'cursive'],
+                        'sans': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-gray-800 relative pb-28">
+
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Header & Title -->
+    <header class="relative z-10 text-center pt-8 px-4 max-w-2xl mx-auto">
+        <div class="inline-block p-2 px-4 rounded-full bg-rose-100 text-love-red font-semibold text-xs tracking-wider uppercase mb-3 shadow-sm border border-rose-200">
+            💖 Daily Messages For You
+        </div>
+        <h1 class="font-cursive text-4xl sm:text-6xl text-deep-rose font-bold mb-2 drop-shadow-sm">
+            Our Journey of Love
+        </h1>
+        <p class="text-sm sm:text-base text-gray-600 font-light">
+            Satu pesan kecil setiap hari untuk mengingatkan betapa berharganya pean bagiku ✨
+        </p>
+
+        <!-- Progress Stats Card -->
+        <div class="mt-6 bg-glass p-4 rounded-2xl shadow-sm max-w-md mx-auto border border-white">
+            <div class="flex justify-between items-center mb-2 text-xs font-semibold text-deep-rose">
+                <span id="current-day-badge">Hari ke-1</span>
+                <span id="progress-percentage">0% Terbuka</span>
+            </div>
+            <div class="w-full bg-rose-200 rounded-full h-3 overflow-hidden p-0.5">
+                <div id="progress-bar" class="bg-gradient-to-r from-pink-500 to-love-red h-full rounded-full transition-all duration-700 w-0"></div>
+            </div>
+            <p id="days-remaining" class="text-xs text-gray-500 mt-2 text-center">Menghitung hari...</p>
+        </div>
+    </header>
+
+    <!-- Main Capsule Grid Section -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 mt-8">
+        <!-- Filter/Tabs -->
+        <div class="flex justify-center gap-2 mb-6 text-sm font-medium">
+            <button id="filter-all" onclick="renderCapsules('all')" class="px-4 py-2 rounded-full bg-love-red text-white shadow-sm transition">Semua</button>
+            <button id="filter-unlocked" onclick="renderCapsules('unlocked')" class="px-4 py-2 rounded-full bg-white text-gray-600 shadow-sm hover:bg-rose-50 transition">Terbuka</button>
+            <button id="filter-locked" onclick="renderCapsules('locked')" class="px-4 py-2 rounded-full bg-white text-gray-600 shadow-sm hover:bg-rose-50 transition">Terkunci</button>
+        </div>
+
+        <!-- Capsules Container -->
+        <div id="capsules-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+            <!-- Populated via JS -->
+        </div>
+    </main>
+
+    <!-- Fixed Audio Player & Playlist Widget -->
+    <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2">
+        <!-- Playlist Dropdown Box (Hidden by default) -->
+        <div id="playlist-box" class="hidden bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-rose-200 w-72 max-h-64 overflow-y-auto p-3 text-xs">
+            <div class="flex justify-between items-center pb-2 mb-2 border-b border-rose-100 font-semibold text-deep-rose">
+                <span>🎵 Daftar Lagu (34 Lagu)</span>
+                <button onclick="togglePlaylist()" class="text-gray-400 hover:text-love-red"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="playlist-items" class="space-y-1">
+                <!-- List lagu digenerate JS -->
+            </div>
+        </div>
+
+        <!-- Floating Player Bar -->
+        <div class="bg-glass-card p-3 rounded-full shadow-lg flex items-center gap-3 border border-rose-200">
+            <button id="bgm-toggle-btn" onclick="toggleBGM()" class="w-10 h-10 rounded-full bg-love-red text-white flex items-center justify-center shadow-md hover:scale-105 transition">
+                <i id="bgm-icon" class="fas fa-music"></i>
+            </button>
+            <div class="text-xs pr-1 max-w-[140px] sm:max-w-[180px]">
+                <p id="bgm-title" class="font-semibold text-deep-rose truncate">Background Music</p>
+                <p id="bgm-status" class="text-gray-500 text-[10px]">Klik untuk memutar 🎵</p>
+            </div>
+            <button onclick="togglePlaylist()" title="Buka Playlist" class="w-7 h-7 rounded-full bg-rose-100 text-love-red flex items-center justify-center hover:bg-rose-200 transition text-xs">
+                <i class="fas fa-list-ul"></i>
+            </button>
+            <button onclick="nextBGM()" title="Lagu Berikutnya" class="text-gray-500 hover:text-love-red px-1">
+                <i class="fas fa-step-forward"></i>
+            </button>
+        </div>
+    </div>
+    <audio id="bgm-player" preload="auto"></audio>
+
+    <!-- Modal Message Popup -->
+    <div id="message-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border-4 border-rose-100 transform scale-95 transition-transform duration-300">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-love-red bg-rose-50 rounded-full w-8 h-8 flex items-center justify-center transition z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="bg-gradient-to-r from-rose-100 to-pink-100 p-6 rounded-t-2xl text-center border-b border-rose-100">
+                <span id="modal-day-badge" class="px-3 py-1 bg-white text-love-red font-bold text-xs rounded-full shadow-sm">Hari ke-1</span>
+                <h3 id="modal-title" class="font-cursive text-3xl text-deep-rose font-bold mt-2">Judul Pesan</h3>
+                <p id="modal-date" class="text-xs text-gray-500 mt-1">1 Januari 2026</p>
+            </div>
+            <div class="p-6 space-y-5">
+                <div id="modal-photo-container" class="hidden rounded-2xl overflow-hidden border border-rose-100 shadow-sm">
+                    <img id="modal-photo" src="" alt="Kenangan" class="w-full h-auto max-h-64 object-cover">
+                </div>
+                <div class="bg-rose-50/50 p-4 rounded-2xl border border-rose-100/60">
+                    <p id="modal-text" class="text-gray-700 leading-relaxed text-sm whitespace-pre-line"></p>
+                </div>
+                <div id="modal-audio-container" class="hidden bg-pink-50 p-4 rounded-2xl border border-pink-100">
+                    <p class="text-xs font-semibold text-deep-rose mb-2 flex items-center gap-2">
+                        <i class="fas fa-microphone-alt"></i> Rekaman Suara Untuk pean:
+                    </p>
+                    <audio id="modal-audio-player" controls class="w-full h-10 rounded-lg"></audio>
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-b-2xl text-center border-t border-gray-100">
+                <p class="font-cursive text-deep-rose text-lg">I love youu ˚˖𓍢ִ໋❀ 𝙺𝚑𝚒𝚢𝚊 ໒꒰ྀིっ˕ -｡꒱ྀི১</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lock Warning Modal -->
+    <div id="lock-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative border-4 border-rose-100">
+            <div class="w-16 h-16 bg-rose-100 text-love-red rounded-full flex items-center justify-center text-2xl mx-auto mb-4 animate-bounce">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3 class="font-bold text-lg text-deep-rose mb-1">Pesan Masih Terkunci!</h3>
+            <p id="lock-modal-desc" class="text-xs text-gray-600 mb-6">Sabar yahhh... pesan ini baru bisa dibuka pada harinya.</p>
+            <button onclick="closeLockModal()" class="w-full py-2.5 bg-love-red text-white rounded-xl font-medium shadow-md hover:bg-rose-700 transition text-sm">Mengerti</button>
+        </div>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="main.js"></script>
+</body>
+</html>
