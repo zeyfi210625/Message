@@ -1,7 +1,7 @@
 /* ==========================================================================
    1. PENGATURAN UTAMA & KONFIGURASI DAFTAR LAGU
    ========================================================================== */
-const START_DATE = "2026-12-31"; /*start proyek*/
+const START_DATE = "2026-11-22"; /*start proyek*/
 const TOTAL_DAYS = 6; /*Jumlah pesan*/
 
 // Daftar Lagu 
